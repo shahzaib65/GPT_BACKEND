@@ -17,6 +17,7 @@ const configuration = new Configuration({
     organization: "org-TmMsYRB81n9adN8RZjWjK87z",
     apiKey: process.env.API_KEY 
 })
+console.log(configuration)
 const openai = new OpenAIApi(configuration)
 
 
@@ -41,6 +42,7 @@ app.post('/', async (req, res)=>{
             max_tokens: 100,
             temperature: .5
         })
+        console.log(responnse)
         res.json({message: response.data.choices[0].text})
 
     }catch(e){
