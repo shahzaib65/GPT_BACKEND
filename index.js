@@ -36,14 +36,20 @@ app.post('/', async (req, res)=>{
     const {message} = req.body
 
     try{
-        const response = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: `${message}`,
-            max_tokens: 100,
-            temperature: .5
-        })
-        console.log(responnse)
-        res.json({message: response.data.choices[0].text})
+        // const response = await openai.createCompletion({
+        //     model: "text-davinci-003",
+        //     prompt: `${message}`,
+        //     max_tokens: 100,
+        //     temperature: .5
+        // })
+        // console.log(responnse)
+        // res.json({message: response.data.choices[0].text})
+          const response = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo", // or 'gpt-4' if enabled for your API key
+            messages: [{ role: "user", content: prompt }],
+        });
+
+        res.send({ reply: response.data.choices[0].message.content });
 
     }catch(e){
         console.log(e)
